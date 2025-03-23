@@ -123,6 +123,101 @@ DDI.TutorialSystem.API:Register(interactiveTutorial)
 
 Full documentation and usage examples are available in the `USAGE_GUIDE.md` file. It is also recommended to study the examples in the `lua/tutorials/examples/` folder.
 
+### API Help
+
+#### Tutorial structure
+
+```lua
+{
+    id = 'unique_tutorial_id',              -- Tutorial unique identifier (required)
+    title = 'Tutorial title',               -- Tutorial title (mandatory)
+    description = 'Tutorial description',   -- Short description
+    category = 'Fundamentals',              -- Category for grouping in the menu
+    author = 'Author name',                 -- Tutorial author
+    icon = 'icon16/star.png',               -- Icon to be displayed in the menu
+    order = 1,                              -- Order of display in the menu
+    requireComplete = { 'tutorial_id' },    -- IDs of tutorials to pass before this one
+    
+    settings = {
+        UIMode = 'standard',                -- UI mode: 'standard', 'minimal', 'custom'
+        Closable = true,                    -- Can the player close the tutorial
+        Skippable = true,                   -- Can the player skip steps
+        ShowHUD = true,                     -- Whether to show HUD
+        PlaySounds = true,                  -- Whether to play sounds
+        AutoAdvance = false,                -- Auto-transition when a condition is met
+        InteractiveMode = false,            -- Fully interactive mode
+        HideUIOnComplete = true,            -- Whether to hide UI on completion
+        HighlightElements = true,           -- Whether to highlight elements
+        CompactMode = false,                -- Use compact UI mode
+        Position = 'right',                 -- UI position: 'right', 'left', 'center'
+        DirectStepNavigation = true,        -- Allow direct navigation through step indicators
+        ShowStepImages = true,              -- Show images in steps
+        ShowStepVideos = true,              -- Show videos in steps
+        AutoPlayMedia = true,               -- Automatically play media
+        AnimateUI = true,                   -- Use animations in UI
+        RewardScreen = true,                -- Show reward screen on completion
+        CompletionEffects = true,           -- Effects when a tutorial is completed
+        ProgressTracking = true,            -- Track and display overall progress
+        SandboxMode = false,                -- Sandbox mode for free experimentation
+        ChallengeMode = false,              -- Challenge mode with achievements
+        DynamicContent = false              -- Dynamically generated content
+    },
+    
+    steps = { -- Array of tutorial steps (mandatory)
+        {
+            text = 'Step text',             -- Displayed text (mandatory)
+            action = function() ... end,    -- Function to be executed when entering a step
+            condition = function() ... end, -- Condition for moving to the next step
+            highlight = 'element_name',     -- Item ID for highlighting
+            image = 'path/to/image.jpg',    -- Path to the image to display
+            video = 'https://youtube.com/embed/videoId', -- URL for video embedding
+            position = { x = 100, y = 100 },-- Position for special elements
+            onExit = function() ... end,    -- Executed when exiting this step
+            forceNavigation = true,         -- Force to show navigation buttons for this step
+        },
+        -- Other steps...
+    },
+    
+    onStart = function() ... end,           -- Executed when the tutorial is started
+    onComplete = function() ... end,        -- Executed when the tutorial ends
+    onExit = function() ... end             -- Executed when exiting the tutorial
+}
+```
+
+#### Main functions of the API
+
+```lua
+-- Tutorial registration
+DDI.TutorialSystem.API:Register(tutorialData)
+
+-- Running a tutorial
+DDI.TutorialSystem.API:Start(tutorialId, forceStart)
+
+-- Checking if the player has completed the tutorial
+DDI.TutorialSystem.API:IsCompleted(tutorialId)
+
+-- Opening the tutorials menu
+DDI.TutorialSystem.API:OpenMenu(category)
+
+-- Getting the list of tutorials
+DDI.TutorialSystem.API:Get(category, sortBy)
+
+-- Getting Tutorials by ID
+DDI.TutorialSystem.API:GetID(tutorialId)
+
+-- Go to the next step of the tutorial
+DDI.TutorialSystem.API:NextStep()
+
+-- Go to the previous step
+DDI.TutorialSystem.API:PreviousStep()
+
+-- End Tutorial
+DDI.TutorialSystem.API:Complete(tutorialId)
+
+-- Exit tutorial
+DDI.TutorialSystem.API:Exit(tutorialId)
+```
+
 #### Hooky (Events)
 
 ```lua
