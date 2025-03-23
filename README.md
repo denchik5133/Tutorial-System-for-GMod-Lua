@@ -1,4 +1,4 @@
-# Tutorial System-for GMod Lua
+# Tutorial System for GMod Lua
 
 A flexible, developer-friendly system for creating interactive step-by-step guides for any addon in Garry's Mod.
 
@@ -6,13 +6,7 @@ A flexible, developer-friendly system for creating interactive step-by-step guid
 
 Tutorial System is a versatile tool for creating tutorials that can be easily integrated into any addon for Garry's Mod. The system provides a complete set of tools for creating step-by-step tutorials with support for interactive elements, walkthrough conditions and visual cues.
 
-## Installation
-
-1. Copy the `lua` folder to the directory of your server or addon
-2. The system will automatically load when you start the server via the `lua/autorun/tutorials_init.lua` file
-3. To access the tutorials, players can use the command `!tutorials` in chat or `tutorials` in the console
-
-### Key Features:
+### Key features:
 
 - **Easy integration** - easy to add to any existing addon
 - **Interactive steps** - ability to set conditions for transition between steps
@@ -40,6 +34,12 @@ Tutorial System is a versatile tool for creating tutorials that can be easily in
 - **Gamification of learning** - game elements and challenges to increase engagement
 - **Support for keyboard navigation** - convenient hotkeys for moving between steps (arrows) and closing (CTRL+ALT)
 - **Customizable keyboard shortcuts** - ability to change and customize keyboard shortcuts for different actions
+
+## Installation
+
+1. Copy the `lua` folder to the directory of your server or addon
+2. The system will automatically load when you start the server via the `lua/autorun/tutorials_init.lua` file
+3. To access the tutorials, players can use the command `!tutorials` in chat or `tutorials` in the console
 
 ## Quick Start
 
@@ -122,6 +122,15 @@ DDI.TutorialSystem.API:Register(interactiveTutorial)
 ## Documentation
 
 Full documentation and usage examples are available in the `USAGE_GUIDE.md` file. It is also recommended to study the examples in the `lua/tutorials/examples/` folder.
+
+### Main sections of documentation:
+
+- [System Overview](USAGE_GUIDE.md#system-overview)
+- [Creating Tutorials](USAGE_GUIDE.md#create-tutorials)
+- [System API](USAGE_GUIDE.md#api)
+- [Usage Examples](USAGE_GUIDE.md#use-examples)
+- [Extension-Functionality](USAGE_GUIDE.md#extension-functionality)
+- [Troubleshooting](USAGE_GUIDE.md#troubleshooting-problems)
 
 ### API Help
 
@@ -236,6 +245,42 @@ hook.Add('DDI.TutorialSystem.StepChanged', 'MyHandler', function(tutorialId, ste
 -- Player has completed the tutorial (client event)
 hook.Add('DDI.TutorialSystem.Completed', 'MyHandler', function(tutorialId) ... end)
 ```
+
+#### UI Functions
+
+```lua
+-- Interface element illumination
+DDI.TutorialSystem:HighlightElement(element)
+
+-- Adding a key hint
+DDI.TutorialSystem.UI:AddKeyHint('Press SPACE', KEY_SPACE)
+
+-- Displaying a pop-up message
+DDI.TutorialSystem.UI:ShowPopupMessage('Caption', 'Message', 5)
+
+-- Создание кнопки
+local button = DDI.TutorialSystem.UI:CreateModernButton(parent, text, x, y, w, h, icon)
+
+-- Creating a shadow for the panel
+DDI.TutorialSystem.UI:CreateShadow(panel, shadowSize, opacity)
+```
+
+## Examples of tutorials
+
+The `lua/tutorials/examples/` folder contains several examples of how to use the system:
+
+- `example_tutorial.lua` - a simple demonstration tutorial with basic functions
+- `basic_controls_tutorial.lua` - tutorial on basic Garry's Mod controls
+- `weapon_tutorial.lua` - interactive tutorial on using weapons
+- `interactive_sandbox_tutorial.lua` - advanced Sandbox tutorial with interactive elements
+- `fully_interactive_tutorial.lua` - fully interactive tutorial without interface buttons
+- `interactive_challenge_tutorial.lua` - game challenge with timer and targets
+- `visual_guides_tutorial.lua` - demonstration of visual cues and navigation elements
+- `modern_ui_showcase.lua` - demonstration of all modern UI features
+- `props_master_tutorial.lua` - tutorial on creating props with time trials
+- `addon_developer_tutorial.lua` - guide for developers on integration with the tutorial system
+- `demo_custom_addon.lua` - example of integration with own addon
+- `integration_example.lua` - example of integration with an existing addon
 
 ## Integration with other addons
 
