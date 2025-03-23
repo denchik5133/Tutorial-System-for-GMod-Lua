@@ -258,9 +258,6 @@ DDI.TutorialSystem.UI:AddKeyHint('Press SPACE', KEY_SPACE)
 -- Displaying a pop-up message
 DDI.TutorialSystem.UI:ShowPopupMessage('Caption', 'Message', 5)
 
--- Создание кнопки
-local button = DDI.TutorialSystem.UI:CreateModernButton(parent, text, x, y, w, h, icon)
-
 -- Creating a shadow for the panel
 DDI.TutorialSystem.UI:CreateShadow(panel, shadowSize, opacity)
 ```
